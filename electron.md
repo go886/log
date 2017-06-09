@@ -13,6 +13,13 @@
 ```
  npm install -g electron-packager
 ```
+
+- 安装asar 压缩包 
+```
+ npm install -g asar
+```
+
+
 - 创建项目
 ```
 mkdir TestElectron  
@@ -24,6 +31,7 @@ npm init
 ```
 npm install --save-dev electron
 npm install  --save-dev electron-packager
+npm install --save-dev asar
 ```
 - 添加 main.js index.html 文件  
 	*main.js*   
@@ -39,15 +47,21 @@ npm install  --save-dev electron-packager
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "pack": "electron-packager . TestElectron --out=dist --overwrite --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=dist --icon=icon.icns"
+    "build": "electron-packager . TestElectron --out=dist --overwrite --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=dist --icon=icon.icns",
+    "pack": "asar pack dist/TestElectron-darwin-x64/TestElectron.app/Contents/Resources/app dist/TestElectron-darwin-x64/TestElectron.app/Contents/Resources/app.asar && rm -rf dist/TestElectron-darwin-x64/TestElectron.app/Contents/Resources/app"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "asar": "^0.13.0",
     "electron": "^1.6.10",
     "electron-packager": "^8.7.1"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
   }
 }
+
 
 ```
  
